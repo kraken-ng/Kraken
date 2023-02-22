@@ -5,43 +5,43 @@
   <img src="static/kraken-logo-background.jpg" alt="Kraken">
 </h1>
 
-<h4 align="center">Kraken, a modular multi-language webshell coded by @secu_x11.</h4>
+<h4 align="center">Kraken, una webshell modular y multi-lenguaje desarrollada por @secu_x11.</h4>
 
 <p align="center">
-  <a href="#verion">Version</a> •
-  <a href="#requirements">Requirements</a> •
-  <a href="#support">Support</a> •
-  <a href="#install">Install</a> •
-  <a href="#usage">Usage</a> •
-  <a href="#examples">Examples</a> •
-  <a href="#contributing">Contributing</a> •
+  <a href="#versión">Versión</a> •
+  <a href="#requirimientos">Requerimientos</a> •
+  <a href="#soporte">Soporte</a> •
+  <a href="#instalación">Instalación</a> •
+  <a href="#guía-de-uso">Guía de Uso</a> •
+  <a href="#ejemplos">Ejemplos</a> •
+  <a href="#contribuciones">Contribuciones</a> •
   <a href="#bugs">Bugs</a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/kraken-ng/Kraken/blob/main/README.md">English</a> •
-  <a href="https://github.com/kraken-ng/Kraken/blob/main/README_ES.md">Spanish</a>
+  <a href="https://github.com/kraken-ng/Kraken/blob/main/README.md">Ingles</a> •
+  <a href="https://github.com/kraken-ng/Kraken/blob/main/README_ES.md">Español</a>
 </p>
 
 ---
 
-## Version
+## Versión
 
 1.0.0 - [Version changelog](CHANGELOG.md)
 
-## Requirements
+## Requerimientos
 
-In order to use the tool, the following requirements must first be satisfied:
+Para poder utilizar la herramienta, primero se deben satisfacer los siguientes requerimientos:
 
-- **python3.8** (>= 3.8): the tool contains syntax elements that are only available in versions >= of Python 3.8.
-- **pip**: in the file [requirements.txt](requirements.txt) are the set of libraries that need to be installed for the tool to work. It is important that the pip version is linked to the Python version, otherwise the libraries will not work.
-- **Docker** (>= 20.10.12): because the modules must be cross-compiled in Java, as no other way has been found to do it, we have chosen to use Docker containers to make this process as elegant and clean as possible.
+- **python3.8** (>= 3.8): la herramienta contiene elementos sintácticos que tan sólo estan disponibles en las versiones >= de Python 3.8.
+- **pip**: en el archivo [requirements.txt](requirements.txt) se encuentran el conjunto de librerias que son necesarias instalar para que la herramienta funcione. Es importante que la versión de pip vaya ligada a la de Python, pues de otra forma no funcionarán las librerias.
+- **docker** (>= 20.10.12): debido a que se deben "cross-compilar" los módulos en Java, pues no se ha encontrado otra forma de hacerlo, se ha optado por utilizar contenedores de Docker para realizar este proceso de la forma más elegante y limpia posible.
 
-Although it is not a requirement, **it is recommended** to use the tool on a Linux operating system to ensure (within expectations), the correct functioning.
+Aunque no es un requerimiento, **se recomienda** utilizar la herramienta en un sistema operativo Linux pues, de esta forma, se asegura (dentro de lo esperado), el correcto funcionamiento.
 
-## Support
+## Soporte
 
-On the one hand, Kraken is supported in different technologies and versions. The following is a list of where Kraken agents are supported:
+Por un lado, Kraken esta soportado en diferentes tecnologías y versiones. A continuación se detalla un listado acerca de dónde los agentes de Kraken estan soportados:
 
 - **PHP (php):**
   - 5.4, 5.5, 5.6
@@ -57,26 +57,26 @@ On the one hand, Kraken is supported in different technologies and versions. The
   - 4.7, 4.7.1, 4.7.2
   - 4.8
 
-On the other hand, it is possible to consult the list of versions and technologies supported by each Kraken module. It is available [here](https://github.com/kraken-ng/modules/blob/main/README.md).
+Por el otro lado, es posible consultar el listado de versiones y tecnologias que soporta cada módulo de Kraken. Se puede consultar [aquí](https://github.com/kraken-ng/modules/blob/main/README.md).
 
-You can check (manually) the compatibility of the modules through the utility: [check_syntax](https://github.com/kraken-ng/utils/blob/main/check_syntax/README.md).
+No obstante, puedes comprobar (manualmente) la compatibilidad de los módulos a través de la utilidad: [check_syntax](https://github.com/kraken-ng/utils/blob/main/check_syntax/README.md).
 
-## Install
+## Instalación
 
-It is not mandatory to do it this way, but it is **RECOMMENDED** to avoid possible errors or unexpected failures during the use of Kraken:
+A continuación se explica el proceso de instalación de los requerimientos, no es obligatorio hacerlo de esta forma, pero si se **RECOMIENDA** para evitar posibles errores o fallos inesperados durante el uso de Kraken:
 
-First of all, start by installing [Conda](https://docs.conda.io/projects/conda/en/stable/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html). This tool will allow you to manage different python "environments" isolated from each other and with different libraries and dependencies. The installation process is very simple, and can be followed here: [Linux](https://conda.io/projects/conda/en/stable/user-guide/install/linux.html) or [Windows](https://conda.io/projects/conda/en/stable/user-guide/install/windows.html)
+En primer lugar se comienza instalando [Conda](https://docs.conda.io/projects/conda/en/stable/) o [Miniconda](https://docs.conda.io/en/latest/miniconda.html). Esta herramienta nos permitirá gestionar diferentes "entornos" python aislados entre sí y con diferentes librerias y dependencias. El proceso de instalación es muy sencillo, y se puede seguir aquí: [Linux](https://conda.io/projects/conda/en/stable/user-guide/install/linux.html) o [Windows](https://conda.io/projects/conda/en/stable/user-guide/install/windows.html)
 
-Once conda is installed, an environment is created for Kraken:
+Una vez se tenga instalado conda, se crea un entorno para Kraken:
 
 ```shell
 conda create -n kraken python=3.8
 conda activate kraken
 ```
 
-> Using this method, it is not necessary to specify the version of Python or Pip, nor do we have visibility problems with the installed python libraries, as everything stays in the virtual environment created with conda.
+> Utilizando este método, no es necesario especificar ni la versión de Python ni de Pip, así como tampoco tendremos problemas de visibilidad con las librerias python instaladas, ya que todo se queda en el entorno virtual creado con conda.
 
-Then proceed to clone the repository and install the dependencies:
+Después se procede a clonar el repositorio e instalar las dependencias:
 
 ```shell
 git clone --recurse-submodules https://github.com/kraken-ng/Kraken.git
@@ -85,25 +85,25 @@ pip install -r requirements.txt
 python kraken.py -h
 ```
 
-> It is very important to clone the existing repository and **submodules** because Kraken components are spread across different repositories. Otherwise, Kraken will not work properly.
+> Es muy importante clonar el repositorio y los **submódulos** existentes ya que, los componentes de Kraken estan repartidos en diferentes repositorios. De otra forma, Kraken no funcionará correctamente.
 
-The next requirement, Docker, can be avoided in case of using PHP and/or ASPX versions of Kraken agents. In the case of using Java, it is necessary to install docker to be able to compile the modules. Although, it is recommended to continue with the installation to have all the requirements installed.
+El siguiente requerimiento, Docker, se puede evitar en caso de usar las versiones PHP y/o ASPX de los agentes de Kraken. En el caso de usar Java es necesario instalar docker para poder compilar los módulos. Aunque, se recomienda seguir con la instalación para tener todos los requerimientos instalados.
 
-Continuing with the installation, we proceed to install **Docker**. This tool can be downloaded either from the package manager or from the [official website](https://docs.docker.com/engine/install/). In principle, the installation process is simple and guided. At the end, simply add your user to the docker group and reboot, so that it can download and deploy the containers. This can be done with:
+Continuando con la instalación, se procede a instalar **Docker**. Esta herramienta se puede descargar, o bien del gestor de paquetes, o de la [página oficial](https://docs.docker.com/engine/install/). En principio el proceso de instalación es sencillo y guiado. Al final, simplemente se debe añadir nuestro usuario al grupo de docker y reiniciar, para que pueda descargar y levantar los contenedores. Esto se puede hacer con:
 
 ```shell
 sudo usermod -aG docker $USER
 ```
 
-Additionally, as an **optional** and recommended dependency (depending on the use you are going to give to the tool), we propose the **Docker-Compose** tool, which will be necessary exclusively to deploy the development and/or test environments. It can be installed from the [official website](https://docs.docker.com/compose/install/) or, during the installation of Docker, through the repositories (if not installed before):
+Adiccionalmente, como dependencia **opcional** y recomendada (que depende del uso que vayas a darle a la herramienta), se propone la herramienta **Docker-Compose**, que será necesaria exclusivamente para desplegar los entornos de desarrollo y/o pruebas. Se puede instalar de la [página oficial](https://docs.docker.com/compose/install/) o, durante la instalación de Docker, a través de los repositorios con (sino se ha instalado antes):
 
 ```shell
 sudo apt install docker-compose-plugin
 ```
 
-## Usage
+## Guía de Uso
 
-After having completed the installation phase, the use of the tool begins:
+Tras haber completado la fase de instalación, se comienza con el uso de la herramienta:
 
 ```
 usage: kraken.py [-h] [-g] [-c] [-m {st,c2}] -p PROFILE -k {raw,container} [-d] [-l]
@@ -125,23 +125,23 @@ optional arguments:
 
 ```
 
-First, an agent must be uploaded in order to be able to communicate with it using Kraken. The agents are located under the [agents](https://github.com/kraken-ng/agents) directory and there are 2 types: **standard** and **c2** which depend on the operation mode you want to use (for more information, consult the wiki).
+Primero, se debe subir un agente para poder comunicarse con él utilizando Kraken. Los agentes se encuentran bajo el directorio [agents](https://github.com/kraken-ng/agents) y existen 2 tipos: **standard** y **c2** que dependen del modo de funcionamiento que se desee utilizar (para saber más información consultar la wiki).
 
-After uploading the agent and having the URL with the path where it has been uploaded, a **Connection Profile** must be created. The process of creating connection profiles is detailed in the wiki). However, you can check some existing ones [here](https://github.com/kraken-ng/utils/tree/main/req2profile/examples).
+Tras subir el agente y disponer de la URL con la ruta donde se ha subido, se debe crear un **Perfil de Conexión**. El proceso de creación de perfiles de conexión se encuentra detallado en la wiki. No obstante, puedes consultar algunos ya existentes [aquí](https://github.com/kraken-ng/utils/tree/main/req2profile/examples).
 
-Once the connection profile has been created, the second step is to connect to the agent, this can be done with the following command (depending on the agent used, one way or another will be specified):
+Una vez creado el perfil de conexión, el segundo paso es conectarse con el agente, esto se puede hacer con el siguiente comando (dependiendo del agente utilizado se especificará un modo u otro):
 
 ```shell
-python kraken.py --connect --mode <MODE> --profile <PROFILE_FILEPATH> --compiler <COMPILER>
+python kraken.py --connect --mode <MODO> --profile <RUTA_DEL_PERFIL>
 ```
 
-After connecting to the agent, Kraken will load the modules that can be used with the agent, and it will give a prompt. Through the prompt, you can consult the available modules by pressing the `<SPACE>` key or directly with the `help` command.
+Tras conectarse con el agente, Kraken cargará los módulos que se pueden utilizar con el agente en cuestión y arrojará una prompt. A través de la prompt se pueden consultar los módulos disponibles pulsando la tecla `<ESPACIO>` o directamente con el comando `help`.
 
-## Examples
+## Ejemplos
 
-As an example, the testing LAMP environment will be used. A **STANDARD** agent will be deployed in the PHP 8 container.
+A modo de ejemplo, se utilizará el entorno de pruebas LAMP. Un agente **STANDARD** será desplegado en el contenedor de PHP 8.
 
-First, deploy PHP containers with Docker Compose:
+Primero, se despliegan los contenedores con Docker Compose:
 
 ```
 (kraken) secu@x11:~/Kraken$ docker compose -f envs/php/docker-compose.yml up -d
@@ -152,9 +152,9 @@ First, deploy PHP containers with Docker Compose:
  ⠿ Container php8-apache  Started                                                             0.4s
 ```
 
-> During deployment with Docker Compose the Standard Agent is copied to the web service directory automatically, so we don't have to upload it manually.
+> Durante el despliegue con Docker Compose se copia el Agente Standard al directorio del servicio web automáticamente, así que no tenemos que subirlo manualmente.
 
-The second step is to create or choose a connection profile to communicate with the deployed agent. In this case, as we are using a test environment, its corresponding connection profile can be used: [profile_testing_php_linux_st.json](https://github.com/kraken-ng/utils/blob/main/req2profile/examples/profile_testing_php_linux_st.json).
+El segundo paso es crear o elegir un perfil de conexión para comunicarnos con el agente desplegado. En este caso, como estamos utilizando un entorno de pruebas, se utilizará su correspondiente perfil de conexión: [profile_testing_php_linux_st.json](https://github.com/kraken-ng/utils/blob/main/req2profile/examples/profile_testing_php_linux_st.json).
 
 ```json
 {
@@ -187,7 +187,7 @@ The second step is to create or choose a connection profile to communicate with 
 }
 ```
 
-In this profile, we can configure all the connection parameters to suit our needs. However, if changes are made (such as the password), these must be reflected in the agent:
+En este perfil, podemos configurar todos los parámetros de conexión para ajustarlo a nuestras necesidades. No obstante, si se realizan cambios (como por ejemplo la contraseña), estos deben reflejarse en el agente:
 
 ```php
 public  $REQUEST_METHOD    = "POST";
@@ -199,9 +199,9 @@ private $REQUEST_DATA_KEY  = "data";
 private $RESPONSE_DATA_KEY = "data";
 ```
 
-> For this example, no data will be modified, since a test environment for PHP is used. But **it is recommended** to modify this information when used outside a test environment.
+> Para este ejemplo, no se modificará ningún dato, ya que se utiliza un entorno de pruebas para PHP. Pero **se recomienda** modificar esta información cuando se use fuera de un entorno de pruebas.
 
-Finally, with the connection profile ready, proceed to connect to the agent:
+Finalmente, con el perfil de conexión listo, se procede a conectarse con el agente:
 
 ```
 (kraken) secu@x11:~/Kraken$ python kraken.py -c -m st -p utils/req2profile/examples/profile_testing_php_linux_st.json -k raw
@@ -269,7 +269,7 @@ Version: 8.0.25
 
 ```
 
-It is also possible to use **C2** mode as shown below:
+También es posible utilizar el modo **C2** como se muestra a continuación:
 
 ```
 (kraken) secu@x11:~/Kraken$ python kraken.py -c -m c2 -p utils/req2profile/examples/profile_testing_php_linux_c2.json -k raw
@@ -372,13 +372,13 @@ Total memory in use: 0 B
 (C2) www-data@c48827a1b2ac:/var/www$ exit                                                                                               
 ```
 
-For more information or to consult the advanced usage guide, visit the project's wiki.
+Para más información o consultar la guía de uso avanzado, visitar la wiki del proyecto.
 
-## Contributing
+## Contribuciones
 
-To contribute to the project: either with new agents, modules or other functionalities, visit the project wiki. The contributions section will detail the whole process to be done for each contribution case.
+Para contribuir en el proyecto: ya sea con nuevos agentes, modulos u otras funcionalidades, visita la wiki del proyecto. La sección de contribuciones detallará todo el proceso a realizar para cada caso de contribución.
 
 ## Bugs
 
-If any bugs or anomalies are identified with Kraken agents, modules or the tool itself, please open a **issue** and an ASAP fix will be attempted.
+Si se identifica algún error o anomalía con los agentes de Kraken, los módulos o con la propia herramienta, por favor, abrir un **issue** y se intentará solucionar ASAP.
 

@@ -1,0 +1,9 @@
+requests
+jsonschema
+prompt_toolkit
+pygments
+click
+prettytable
+docker
+validators
+columnar

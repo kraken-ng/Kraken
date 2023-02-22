@@ -1,0 +1,9 @@
+logs/*
+!logs/.gitkeep
+
+temp/*
+!temp/.gitkeep
+
+__pycache__
+.vscode
+.conda
