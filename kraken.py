@@ -2,6 +2,8 @@ import os, argparse, traceback, importlib
 
 from lib.config import MODE_STANDARD, MODE_C2
 from lib.config import CLIENTS_PATH, AVAILABLE_COMPILERS
+from lib.config import AGENTS_PATH, MODULES_PATH, ENVS_PATH, UTILS_PATH
+from lib.common import dir_is_empty
 from lib.exception import CoreException
 from lib.printer import print_error, print_warning
 
@@ -31,6 +33,10 @@ if __name__ == "__main__":
 
         if os.name == "nt":
             os.system("color")
+
+        if (dir_is_empty(AGENTS_PATH) or dir_is_empty(MODULES_PATH) or dir_is_empty(ENVS_PATH) or dir_is_empty(UTILS_PATH)):
+            print_error("The project has not been cloned recursively. Ensure that the directories: 'agents', 'modules', 'utils' and/or 'envs' are not empty.")
+            exit(1)
 
         if ((args.generate and args.connect) or (not args.generate and not args.connect)):
             parser.print_help()

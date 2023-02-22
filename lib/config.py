@@ -50,6 +50,9 @@ TEMPORAL_PATH                    = "temp"
 COMPILERS_PATH                   = "compilers"
 DISPATCHERS_PATH                 = "dispatchers"
 FORMATERS_PATH                   = "formaters"
+AGENTS_PATH                      = "agents"
+ENVS_PATH                        = "envs"
+UTILS_PATH                       = "utils"
 
 # Other configuration values
 DEFAULT_EMPTY_EXECUTOR           = "-"

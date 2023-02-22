@@ -204,3 +204,10 @@ def convert_size(size_bytes):
    p = math.pow(1024, i)
    s = round(size_bytes / p, 2)
    return f"{s} {size_name[i]}"
+
+def dir_is_empty(dirpath):
+    dirfiles = os.listdir(dirpath)  
+    if len(dirfiles) == 0:
+        return True
+    else:
+        return False
