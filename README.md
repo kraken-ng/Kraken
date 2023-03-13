@@ -28,11 +28,11 @@ Although its main use is focused on offensive purposes (e.g. red teams, internal
 
 ## Version
 
-1.0.0 - [Version CHANGELOG](CHANGELOG.md)
+1.0.1 - [Version CHANGELOG](CHANGELOG.md)
 
-## Wiki
+## Documentation
 
-All the information about the functionality of the modules, the structure and the creation is explained in the [Github's Wiki]:
+All the information about the installation process, usage, internal design, contributions and much more is explained in the [Github Wiki]:
 
 - **[I. Home]**
 - **[II. Support]**
@@ -91,7 +91,7 @@ All the information about the functionality of the modules, the structure and th
 
 
 
-[Github's Wiki]: https://github.com/kraken-ng/Kraken/wiki
+[Github Wiki]: https://github.com/kraken-ng/Kraken/wiki
 [I. Home]: https://github.com/kraken-ng/Kraken/wiki
 [II. Support]: https://github.com/kraken-ng/Kraken/wiki/Support
 [Agents supported]: https://github.com/kraken-ng/Kraken/wiki/Support#agents
