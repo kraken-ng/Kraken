@@ -1,5 +1,13 @@
 # Change Log
 
+## [v1.0.1] - 2023-03-13
+
+- Added Kraken Wiki (with detailed information about the installation process and usage, as well as contributions in Kraken modules).
+- New modules:
+  - "mv": module to move files or directories.
+- Mutiple bugs fixed:
+  - Fixed some path normalization issues in all Java modules as well as in the template. 
+
 ## [v1.0.0] - 2023-02-25
 
 - Multiple bugs fixed:
