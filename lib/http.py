@@ -334,7 +334,7 @@ class HTTPClient:
                 raise CoreException(f"response has not data cookie: '" + self.response["key"] + "'")
             return response.cookies[self.response["key"]] 
         elif self.response["type"] == "FIELD":
-            m = re.match(self.response["key"] + "\=([A-Fa-f0-9]+)", response.text)
+            m = re.match(self.response["key"] + "\=([A-Fa-f0-9]+)", response.text.strip())
             if ((not m) or (len(m.groups()) != 1)):
                 raise CoreException(f"response has not data field: '" + self.response["key"] + "'" + "\n" + response.text)
             return m.group(1)

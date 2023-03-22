@@ -270,7 +270,7 @@ CORE_COMMANDS = [
     },
     {
         "name" : "rev2self",
-        "description" : f"Revert back to the original user (sets the token to {DEFAULT_TOKEN_VALUE})",
+        "description" : f"Revert back to the original security context (sets the token to {DEFAULT_TOKEN_VALUE})",
         "author" : "@secu_x11",
         "examples" : [
             "rev2self"

@@ -1,5 +1,30 @@
 # Change Log
 
+## [v1.1.0] - 2023-03-22
+
+- Multiple bugs fixed:
+  - "cp" (Java)
+    - A missing try catch block has been added to control possible exceptions thrown during path normalization.
+  - "dup_token" (NET)
+    - The handle to the target process has been changed by using the OpenProcess function (which gives more control and allows specifying a flag to interact with PPL processes). Thanks to [Pablo Martinez](https://twitter.com/xassiz) for the notice and support.
+    - We have also eliminated a block for checking the identity of the Current Thread that, on certain occasions, produced an unexpected error.
+  - "execute" (JAVA)
+    - A missing try catch block has been added to control possible exceptions thrown during path normalization.
+  - "execute_with_token" (NET)
+    - The CreateProcessWithToken function has been changed to CreateProcessAsUser. In previous versions, this module did not work correctly when using tokens from non-NT Authority System users. Thanks to the fix added by [Kurosh](https://twitter.com/_Kudaes_) in Hanshell I was able to port it to Kraken.
+    - The same identity check block in the "dup_token" module has also been removed.
+  - "reg_dump_trans" (NET), previously as secretsdump. (cc: @xassiz)
+    - The name has been changed because the functionality that this module performed could be extended and, therefore, its functionality changed.
+    - Extraction of any registry key is now supported.
+    - Some missing functionalities have been added for the closing of the elements used by the module (transacted file rollback, closing of handlers and mapped view file).
+    - The check based on administrative permissions has been changed to one based on SeBackup privilege. Since not all registry key extractions require administrative privileges, however, SeBackup is needed.
+  - Fixed a bug in the standard Java agent that prevented correct operation in certain environments (Liferay).
+  - Fixed a bug in the processing of the HTTP response returned by the agent.
+- New modules:
+  - "hotfixes": module to show hotfixes installed on current computer (via WMI). Thanks to [Etnum](https://twitter.com/the_etnum)
+- New environments:
+  - Different versions of Liferay environments have been added where the correct operation of Kraken Java agents has been validated..
+
 ## [v1.0.1] - 2023-03-13
 
 - Added Kraken Wiki (with detailed information about the installation process and usage, as well as contributions in Kraken modules).
