@@ -1,5 +1,14 @@
 # Change Log
 
+## [v1.1.1] - 2023-03-24
+
+- Multiple bugs fixed:
+  - Adapted Kraken ASP NET agent to work in NET Framework 2.0.
+  - Adapted Kraken's modules to work in NET Framework 2.0.
+  - Minimal fixes in NET modules.
+  - Minimal fixes in some Kraken's utils.
+  - Extending versioning in some NET Assemblies.
+
 ## [v1.1.0] - 2023-03-22
 
 - Multiple bugs fixed:
