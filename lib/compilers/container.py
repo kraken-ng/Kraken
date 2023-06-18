@@ -7,10 +7,11 @@ from lib.config import MODULE_CLASS_NAME
 
 
 class Compiler:
-    def __init__(self, container, agent_type, debug):
-        self.container    = container
-        self.agent_type   = agent_type
-        self.debug        = debug
+    def __init__(self, container, agent_type, agent_version, debug):
+        self.container     = container
+        self.agent_type    = agent_type
+        self.agent_version = agent_version
+        self.debug         = debug
     
     def __compile_java_module(self, temporal_dir, module_filepath, force=False):
         try:

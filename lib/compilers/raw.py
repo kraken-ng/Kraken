@@ -3,10 +3,11 @@ from lib.exception import CoreException
 
 
 class Compiler:
-    def __init__(self, container, agent_type, debug):
-        self.container    = container
-        self.agent_type   = agent_type
-        self.debug        = debug
+    def __init__(self, container, agent_type, agent_version, debug):
+        self.container     = container
+        self.agent_type    = agent_type
+        self.agent_version = agent_version
+        self.debug         = debug
     
     def __compile_php_module(self, temp_filepath):
         return read_file(temp_filepath, True)

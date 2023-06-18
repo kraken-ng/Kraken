@@ -63,7 +63,7 @@ MODULE_CLASS_NAME                = "Module"
 ALL_MODULES                      = "all"
 AVAILABLE_SO_AGENTS              = ["Linux", "Windows"]
 AVAILABLE_TYPE_AGENTS            = ["php", "java", "cs"]
-AVAILABLE_COMPILERS              = ["raw", "container"]
+AVAILABLE_COMPILERS              = ["raw", "container", "precompiled", "csc"]
 
 # Containers Configuration
 CONTAINERS = {

@@ -122,7 +122,7 @@ class Client(object):
             raise CoreException(f"compiler: '{compiler_filepath}' not found in compilers path")
 
         compiler_mod = importlib.import_module(f"lib.{COMPILERS_PATH}.{compiler_name}")
-        self.compiler = compiler_mod.Compiler(self.container, self.agent_type, self.debug)
+        self.compiler = compiler_mod.Compiler(self.container, self.agent_type, self.agent_version, self.debug)
         
         # Precompiling modules for faster loading in containerized compilation
         if compiler_name == "container":
