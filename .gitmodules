@@ -14,3 +14,7 @@
 	path = modules
 	url = https://github.com/kraken-ng/modules
 	branch = main
+[submodule "net_assemblies"]
+	path = net_assemblies
+	url = https://github.com/kraken-ng/net_assemblies
+	branch = main
