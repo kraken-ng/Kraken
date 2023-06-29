@@ -1,5 +1,28 @@
 # Change Log
 
+## [v1.2.0] - 2023-06-29
+
+- New agents added
+  - PHP Agent using "create_function" as executor
+  - PHP Agent using "include/require" as executor
+  - NET Agent using "Assembly.Load" as executor
+  - NET Agent using "System.Reflection.Emit" as executor
+- New compilers added to be used with different executors:
+  - "Csc": this compiler allows you to compile each module you want to use at runtime and send it to an agent with an in-memory NET Assemblies loader (such as a Reflective NET Loader).
+  - "Precompiled": this compiler allows you to use pre-compiled versions of .NET modules in .exe or .dll (NET Assemblies) form. You can use this compiler together with agent with an in-memory NET Assemblies loader.
+- New utils:
+  - "Precompiler": utility that allows to precompile Kraken modules. These can be used in executors that use dynamic loading of binaries into memory.
+- New NET Assemblies:
+  - New NET Assemblies focused on Privilege Escalation abusing DCOM services have been added: PrinterNotifyPotato and McpManagementPotato.
+  - A modified version of EfsPotato, an Elevation of Privilege exploit abusing MS-EFSR, has been added.
+- New modules:
+  - "enum_antivirus": module to enumerate registered antivirus (via WMI) in Windows systems. Readapted from [Seatbelt command](https://github.com/GhostPack/Seatbelt/blob/master/Seatbelt/Commands/Windows/AntiVirusCommand.cs)
+- By introducing new agents and compilers, small changes have been made in the Core and in the different submodules (envs, modules, etc).
+- Multiple Bugs Fixed
+  - Multiple minor bugs affecting some net_assemblies have been fixed. Some net assemblies have been adapted so that all of them work correctly with the execute_assembly module.
+  - Fixed some minor bugs in PHP agents (st and c2). They now provide more insight into certain bugs.
+  - Fixed a minor bug in PHP execute module. This change prevents a warning from occurring when using utf8_encode() on Windows systems whose PHP version indicates that this function is deprecated.
+
 ## [v1.1.1] - 2023-03-24
 
 - Multiple bugs fixed:
