@@ -28,7 +28,7 @@ Although its main use is focused on offensive purposes (e.g. red teams, internal
 
 ## Version
 
-1.1.1 - [CHANGELOG Version](CHANGELOG.md)
+1.2.0 - [CHANGELOG Version](CHANGELOG.md)
 
 ## Documentation
 
