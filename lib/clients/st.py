@@ -10,35 +10,29 @@ from lib.printer import format_info, format_warning, format_error
 from lib.config import DEFAULT_TOKEN_VALUE
 from lib.config import ACTION_STATUS, ACTION_INVOKE
 from lib.config import SUCCESS_RESPONSE_CODE, FAILED_RESPONSE_CODE
-from lib.config import COMMAND_CHANGE_DIRECTORY, COMMAND_EXIT, COMMAND_HELP
-from lib.config import COMMAND_REV2SELF, COMMAND_RECOMPILE
+from lib.config import COMMAND_CHANGE_DIRECTORY, COMMAND_EXIT, COMMAND_HELP, COMMAND_INFO
+from lib.config import COMMAND_REV2SELF, COMMAND_RECOMPILE, COMMAND_LOGGING
 from lib.common import unpack_fields, hex2bin, find_module
 from lib.common import create_temporal_directory, parse_agent_response_data
 
 
 class CustomClient(Client):
 
-    def __init__(self, mode, profile, debug, logging):
-         super(CustomClient, self).__init__(mode, profile, debug, logging)
+    def __init__(self, mode, profile, compiler_name, debug, logging):
+         super(CustomClient, self).__init__(mode, profile, compiler_name, debug, logging)
 
     def __extract_status_response(self, response):
-        '''
-        It processes a "status" response from the Kraken agent and extracts the fields that identify the context
-        in which the agent runs. These fields will later be used by the client and determine its operation.
-
-        Args:
-            response: A string containing the agent's response in a "nested hexadecimal encapsulation" format.
-
-        Returns:
-            An array of values corresponding to the fields of the response.
-
-        Raises:
-            CoreException: An exception is thrown when an expected field of the response does not exist or is invalid.
-        '''
         response_fields = unpack_fields(response)
         if response_fields == None:
             raise CoreException(f"Invalid status response, no fields extracted")
         
+        agent_ex_hex = response_fields.get("ex")
+        if agent_ex_hex == None:
+            raise CoreException("Unexistent 'ex' field in status response")
+        agent_ex = hex2bin(agent_ex_hex)
+        if agent_ex == None:
+            raise CoreException("Invalid 'ex' field in status response")
+
         agent_so_hex = response_fields.get("so")
         if agent_so_hex == None:
             raise CoreException("Unexistent 'so' field in status response")
@@ -81,7 +75,7 @@ class CustomClient(Client):
         if agent_hostname == None:
             raise CoreException("Invalid 'hostname' field in status response")
 
-        return (agent_so.decode(), agent_pwd.decode(),
+        return (agent_ex.decode(), agent_so.decode(), agent_pwd.decode(),
                     agent_type.decode(), agent_version.decode(),
                     agent_user.decode(), agent_hostname.decode())
 
@@ -93,13 +87,15 @@ class CustomClient(Client):
             raise CoreException(message)
 
         status_fields = self.__extract_status_response(message)
-        
-        self.agent_so       = status_fields[0]
-        self.agent_pwd      = status_fields[1]
-        self.agent_type     = status_fields[2]
-        self.agent_version  = status_fields[3]
-        self.agent_hostname = status_fields[5]
-        self.agent_token.push(status_fields[4], DEFAULT_TOKEN_VALUE)
+
+        self.agent_executor = int(status_fields[0])
+        self.agent_so       = status_fields[1]
+        self.agent_pwd      = status_fields[2]
+        self.agent_type     = status_fields[3]
+        self.agent_version  = status_fields[4]
+        self.agent_hostname = status_fields[6]
+        self.agent_token.push(status_fields[5], DEFAULT_TOKEN_VALUE)
+        self.validate_executor()
         return
 
     def do_invoke(self, user_input, module_name, module_args):
@@ -162,10 +158,23 @@ class CustomClient(Client):
                 if (user_input == COMMAND_EXIT):
                     break
                 
+                if (user_input == COMMAND_INFO):
+                    self.show_info()
+                    continue
+
                 if (user_input == COMMAND_HELP):
                     self.commands.show_help_all()
                     continue
                 
+                if (user_input == COMMAND_LOGGING):
+                    if self.logging:
+                        self.logging = False
+                        print_info("Turn off logging...")
+                    else:
+                        self.logging = True
+                        print_info("Turn on logging...")
+                    continue
+
                 if (user_input == COMMAND_REV2SELF):
                     if (not self.commands.get_by_name(COMMAND_REV2SELF)):
                         raise CoreException(f"Command '{COMMAND_REV2SELF}' not found in command list")

@@ -80,7 +80,7 @@ class HTTPClient:
         '''
         for http_dict_key, http_dict_value in http_dict_values.items():
             if not isinstance(http_dict_key, str):
-                raise CoreException(profile_header_key)
+                raise CoreException(http_dict_key)
             if not isinstance(http_dict_value, str):
                 raise CoreException(http_dict_value)
         return
@@ -353,9 +353,7 @@ class HTTPClient:
         Raises:
             CoreException: An Exception thrown when a problem occurs with data processing.       
         '''
-        #print(agent_data)
         response = self.__make_http_request(agent_data)
-        #print("rtxt: '" + response.text + "'")
         response_data = self.__parse_response(response)
         return unprotect(response_data, self.secret["value"])
         

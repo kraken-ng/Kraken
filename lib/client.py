@@ -1,23 +1,26 @@
-import os, importlib
+import os, importlib, columnar
 
 from lib.http import HTTPClient
 from lib.token import Token
 from lib.commands import Commands
 from lib.exception import CoreException
-from lib.config import FORMATERS_PATH, COMPILERS_PATH, CONTAINERS, ALL_MODULES
+from lib.shell import url_to_filename
+from lib.config import FORMATERS_PATH, COMPILERS_PATH, CONTAINERS, ALL_MODULES, EXECUTORS
 from lib.docker import get_docker_env, create_container
 from lib.common import create_temporal_directory, find_module
 from lib.printer import print_info, print_warning, print_error, print_error_args
-from lib.printer import format_info, format_warning, format_error
+from lib.printer import format_ok, format_config, format_info, format_warning, format_error
 
 
 class Client(object):
 
-    def __init__(self, mode, profile, debug, logging):
+    def __init__(self, mode, profile, compiler_name, debug, logging):
         self.mode           = mode
         self.httpclient     = HTTPClient(profile)
+        self.compiler_name  = compiler_name
         self.compiler       = None
         self.container      = None
+        self.agent_executor = None
         self.agent_so       = None
         self.agent_pwd      = None
         self.agent_type     = None
@@ -27,6 +30,24 @@ class Client(object):
         self.commands       = None
         self.debug          = debug
         self.logging        = logging
+
+    def show_info(self):
+        message = []
+        message.append(["Agent URL:", format_config(self.httpclient.url)])
+        message.append(["Agent Tech:", format_config(f"{self.agent_type.upper()} {self.agent_version} ({self.agent_so})")])
+        message.append(["Agent Executor:", format_config(self.agent_executor)])
+        message.append(["Client Compiler:", format_config(self.compiler_name)])
+        message.append(["Client Password:", format_config(self.httpclient.secret)])
+        message.append(["Client HTTP Method:", format_config(self.httpclient.method)])
+        message.append(["Client Expect Send:", format_config(self.httpclient.data)])
+        message.append(["Client Expect Recv:", format_config(self.httpclient.response)])
+        if self.logging:
+            message.append(["Client Logging:", format_config(f"Extended ({url_to_filename(self.httpclient.url).replace('.log', '_all.log')})")])
+        else:
+            message.append(["Client Logging:", format_config(f"Default ({url_to_filename(self.httpclient.url)})")])
+        table = columnar.columnar(message, no_borders=True, justify=['l', 'l'])
+        print(str(table))
+        return
 
     def get_target_container_config(self, container_configs):
         version = self.agent_version.split(".")
@@ -135,3 +156,24 @@ class Client(object):
             print_info("Unloading container (please be patient)")
             self.container.stop()
         return
+
+    def validate_executor(self):
+        for tech, exec_availables in EXECUTORS.items():
+            if tech != self.agent_type:
+                continue
+            for exec_available in exec_availables:
+                if exec_available.get("id") != self.agent_executor:
+                    continue
+                for comp_available in exec_available.get("compilers"):
+                    if comp_available != self.compiler_name:
+                        continue
+                    
+                    self.agent_executor = exec_available.get('name')
+                    return
+                else:
+                    aval_compilers = ",".join(exec_available.get("compilers"))
+                    raise CoreException(f"Compiler mismatch. For executor '{exec_available.get('name')}' you must use one of these compilers (-k): '{aval_compilers}'")
+            else:
+                raise CoreException(f"Can't find any executor with id: '{exec_available.get('id')}'")
+        else:
+            raise CoreException(f"Can't find any executor for this agent type: '{self.agent_type}'")

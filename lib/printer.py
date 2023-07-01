@@ -21,6 +21,9 @@ def format_warning(message):
 def format_error(message):
     return f"{COLORS.ERROR}[!] {message}{COLORS.ENDCOLOR}"
 
+def format_config(message):
+    return f"{COLORS.OKCYAN}{message}{COLORS.ENDCOLOR}"
+
 def print_info(message):
     print(format_info(message))
 
