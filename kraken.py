@@ -8,13 +8,13 @@ from lib.exception import CoreException
 from lib.printer import print_error, print_warning
 
 
-def load_client(mode, profile, debug, log):
+def load_client(mode, profile, compiler, debug, log):
     client_filepath = f"lib/{CLIENTS_PATH}/{mode}.py"
     if not os.path.isfile(client_filepath):
         raise CoreException(f"client: '{client_filepath}' not found clients directory")
 
     client_mod = importlib.import_module(f"lib.{CLIENTS_PATH}.{mode}")
-    client = client_mod.CustomClient(mode, profile, debug, log)
+    client = client_mod.CustomClient(mode, profile, compiler, debug, log)
     return client
 
 if __name__ == "__main__":
@@ -47,7 +47,7 @@ if __name__ == "__main__":
             exit(0)
         elif args.connect:
 
-            client = load_client(args.mode, args.profile, args.debug, args.log)
+            client = load_client(args.mode, args.profile, args.compiler, args.debug, args.log)
             client.do_status()
             client.load_commands()
             client.load_containers(args.compiler)

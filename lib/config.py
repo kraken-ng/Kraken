@@ -16,10 +16,12 @@ FAILED_RESPONSE_CODE             = "1"
 # Core Commands
 COMMAND_EXIT                     = "exit"
 COMMAND_HELP                     = "help"
+COMMAND_INFO                     = "info"
 COMMAND_CHANGE_DIRECTORY         = "cd"
 COMMAND_REV2SELF                 = "rev2self"
 COMMAND_CLOSE_TOKEN              = "close_token"
 COMMAND_RECOMPILE                = "recompile"
+COMMAND_LOGGING                  = "logging"
 
 # Exclusive C2 Commands
 C2_COMMAND_LIST_MODULES          = "list_modules"
@@ -64,6 +66,56 @@ ALL_MODULES                      = "all"
 AVAILABLE_SO_AGENTS              = ["Linux", "Windows"]
 AVAILABLE_TYPE_AGENTS            = ["php", "java", "cs"]
 AVAILABLE_COMPILERS              = ["raw", "container", "precompiled", "csc"]
+
+# Executors Configuration (and supported compilers)
+EXECUTORS = {
+    "php" : [
+        {
+            "name" : "eval",
+            "id" : 0,
+            "compilers" : ["raw"],
+        },
+        {
+            "name" : "create_function",
+            "id" : 3,
+            "compilers" : ["raw"],
+        },
+        {
+            "name" : "include",
+            "id" : 4,
+            "compilers" : ["raw"],
+        },
+        {
+            "name" : "require",
+            "id" : 5,
+            "compilers" : ["raw"],
+        },
+    ],
+    "java" : [
+        {
+            "name" : "ClassLoader",
+            "id" : 1,
+            "compilers" : ["container"],
+        },
+    ],
+    "cs" : [
+        {
+            "name" : "CSharpCodeProvider",
+            "id" : 2,
+            "compilers" : ["raw"],
+        },
+        {
+            "name" : "Assembly.Load",
+            "id" : 6,
+            "compilers" : ["precompiled", "csc"],
+        },
+        {
+            "name" : "System.Reflection.Emmit",
+            "id" : 7,
+            "compilers" : ["precompiled", "csc"],
+        },
+    ]
+}
 
 # Containers Configuration
 CONTAINERS = {
@@ -269,16 +321,39 @@ CORE_COMMANDS = [
         ]
     },
     {
-        "name" : "rev2self",
-        "description" : f"Revert back to the original security context (sets the token to {DEFAULT_TOKEN_VALUE})",
+        "name" : "info",
+        "description" : "Show Information about the Kraken's context (client and agent config)",
         "author" : "@secu_x11",
         "examples" : [
-            "rev2self"
+            "info"
         ],
         "so" : [
             {
+                "name" : "Linux",
+                "agents" : ["php","java"]
+            },
+            {
                 "name" : "Windows",
-                "agents" : ["cs"]
+                "agents" : ["php","java","cs"]
+            }
+        ],
+        "args" : []
+    },
+    {
+        "name" : "logging",
+        "description" : "Turn on/off the extended logging",
+        "author" : "@secu_x11",
+        "examples" : [
+            "logging"
+        ],
+        "so" : [
+            {
+                "name" : "Linux",
+                "agents" : ["php","java"]
+            },
+            {
+                "name" : "Windows",
+                "agents" : ["php","java","cs"]
             }
         ],
         "args" : []
@@ -311,6 +386,21 @@ CORE_COMMANDS = [
                 }
             }
         ]
+    },
+    {
+        "name" : "rev2self",
+        "description" : f"Revert back to the original security context (sets the token to {DEFAULT_TOKEN_VALUE})",
+        "author" : "@secu_x11",
+        "examples" : [
+            "rev2self"
+        ],
+        "so" : [
+            {
+                "name" : "Windows",
+                "agents" : ["cs"]
+            }
+        ],
+        "args" : []
     }
 ]
 
