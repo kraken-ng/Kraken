@@ -1,4 +1,4 @@
-import os, re, shutil, subprocess
+import os, re, shutil, subprocess, platform
 from lib.common import read_file, file_exists
 from lib.exception import CoreException
 
@@ -13,6 +13,8 @@ class Compiler:
         self.get_net_compilers()
         
     def get_net_compilers(self):
+        if platform.system() != "Windows":
+            raise CoreException(f"Invalid OS: '{platform.system()}'. Windows is needed to use csc compiler")
         netpath = "C:\\Windows\\Microsoft.NET\\Framework64"
         for net_version in os.listdir(netpath):
             abs_net_version = f"{netpath}\\{net_version}"
