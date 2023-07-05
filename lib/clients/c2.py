@@ -156,7 +156,7 @@ class CustomClient(Client):
 
         status_fields = self.__extract_status_response(message)
         
-        self.agent_executor = status_fields[0]
+        self.agent_executor = int(status_fields[0])
         self.agent_so       = status_fields[1]
         self.agent_pwd      = status_fields[2]
         self.agent_type     = status_fields[3]
