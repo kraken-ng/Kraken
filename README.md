@@ -145,3 +145,22 @@ All the information about the installation process, usage, internal design, cont
 [VII. Acknowledgments & References]: https://github.com/kraken-ng/Kraken/wiki/Acknowledgments-&-References
 [Acknowledgments]: https://github.com/kraken-ng/Kraken/wiki/Acknowledgments-&-References#acknowledgments
 [References]: https://github.com/kraken-ng/Kraken/wiki/Acknowledgments-&-References#references
+
+## Greetz
+
+To express my heartfelt gratitude and appreciation for the extraordinary individuals you are, and for the crucial roles you have played in my life. There are times when words fail to fully express the depth of the feeling, but the English language has gifted us with the term "thank you," and I feel this is a fitting start.
+
+Each of you has been a beacon in your own unique way, emitting a light that has guided me through some of life's most treacherous waters. The kindness, compassion, and human quality you exude are a testament to your character and they make a profound difference. I'm grateful for the understanding and patience you've shown me, offering me support when I needed it, and standing by me even when things got tough. You've taught me about strength, resilience, and the importance of maintaining a good spirit, even in the face of adversity.
+
+In addition to your undeniable human quality, your technical skills are nothing short of extraordinary. Your abilities have paved the way for countless opportunities and successes. Your technological prowess has not only made a significant impact in my life but also continues to shape the world around us.
+
+Your expertise and wisdom in the technical field have not only helped me but have also made the world a better place. Whether you've fixed a stubborn computer glitch, offered advice on an intricate problem, or provided a solution to a complex issue, you've proven time and time again that your technical capabilities are exceptional.
+
+But it's the combination of your humanity and your skills that makes you truly special. You are not only smart but kind and caring. You use your technical abilities not for self-glory, but to help others. You've demonstrated that it's not enough to be good at something; one must also use their talents to make a positive difference.
+
+Thank you, my friends, for being in my life. You are the epitome of the saying, "Friends are the family we choose." I'm not only glad but profoundly honored to have chosen you as mine.
+
+- [Dreg](https://github.com/therealdreg)
+- [J0MoZ4](https://twitter.com/J0MoZ4)
+- [TNT](https://twitter.com/_nt_tnt)
+- [Jusepe](https://twitter.com/Jusepe_it)
