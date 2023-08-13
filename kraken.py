@@ -24,10 +24,12 @@ if __name__ == "__main__":
         parser = argparse.ArgumentParser(description="Kraken, a modular multi-language webshell (coded by @secu_x11)")
         parser.add_argument('-g', "--generate", action='store_true', help="Generate a webshell (php/jsp/aspx)")
         parser.add_argument('-c', "--connect", action='store_true', help="Connect to a deployed webshell")
+        parser.add_argument('-u', "--update", action='store', help="x")
+        parser.add_argument('-d', "--delete", action='store_true', help="x")
         parser.add_argument('-m', "--mode", action='store', default=MODE_STANDARD, choices=[MODE_STANDARD, MODE_C2], help="Mode of operation with agent")
         parser.add_argument('-p', "--profile", action='store', required=True, help="Filepath of Connection Profile to use")
         parser.add_argument('-k', "--compiler", action='store', required=True, choices=AVAILABLE_COMPILERS, help="Name of the compiler to use")
-        parser.add_argument('-d', "--debug", action='store_true', help="Turn ON Debug Mode")
+        parser.add_argument('-v', "--verbose", action='store_true', help="Turn ON Debug Mode")
         parser.add_argument('-l', "--log", action='store_true', help="Log all executed commands and outputs")
         args = parser.parse_args()
 
@@ -38,7 +40,8 @@ if __name__ == "__main__":
             print_error("The project has not been cloned recursively. Ensure that the directories: 'agents', 'modules', 'utils' and/or 'envs' are not empty.")
             exit(1)
 
-        if ((args.generate and args.connect) or (not args.generate and not args.connect)):
+        if ((args.generate and args.connect and args.update and args.delete) or
+            (not args.generate and not args.connect and not args.update and not args.delete)):
             parser.print_help()
             exit(1)
 
@@ -46,17 +49,22 @@ if __name__ == "__main__":
             print_warning("Not yet...")
             exit(0)
         elif args.connect:
-
-            client = load_client(args.mode, args.profile, args.compiler, args.debug, args.log)
+            client = load_client(args.mode, args.profile, args.compiler, args.verbose, args.log)
             client.do_status()
             client.load_commands()
             client.load_containers(args.compiler)
             client.load_compiler(args.compiler)
             client.prompt()
             client.unload_containers()
+        elif args.update:
+            client = load_client(args.mode, args.profile, args.compiler, args.verbose, args.log)
+            client.do_update(args.update)
+        elif args.delete:
+            client = load_client(args.mode, args.profile, args.compiler, args.verbose, args.log)
+            client.do_delete()
     
     except CoreException as ce:
-        ce.print_exception(args.debug)
+        ce.print_exception(args.verbose)
         if client != None:
             client.unload_containers()
         exit(1)

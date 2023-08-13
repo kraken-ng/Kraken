@@ -8,6 +8,8 @@ ACTION_INVOKE                    = "1"
 ACTION_LOAD                      = "2"
 ACTION_UNLOAD                    = "3"
 ACTION_CLEAN                     = "4"
+ACTION_UPDATE                    = "5"
+ACTION_DELETE                    = "6"
 
 # Response codes
 SUCCESS_RESPONSE_CODE            = "0"

