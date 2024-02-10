@@ -47,6 +47,10 @@ class Dispatcher:
             delay = module_args_parsed.d[0]
             quiet = module_args_parsed.q
 
+            if not os.path.isabs(local_file):
+                tmp_dir = os.path.join(os.getcwd(), local_file)
+                local_file = os.path.abspath(tmp_dir)
+
             if not os.path.exists(local_file):
                 raise CoreException(f"Invalid arguments '{local_file}': file not exists")
 
@@ -117,6 +121,10 @@ class Dispatcher:
         seek = module_args_parsed.s[0]
         delay = module_args_parsed.d[0]
         quiet = module_args_parsed.q
+
+        if not os.path.isabs(local_file):
+            tmp_dir = os.path.join(os.getcwd(), local_file)
+            local_file = os.path.abspath(tmp_dir)
 
         if not os.path.exists(local_file):
             raise CoreException(f"Invalid arguments '{local_file}': file not exists")

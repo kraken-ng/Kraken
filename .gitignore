@@ -7,3 +7,4 @@ temp/*
 __pycache__
 .vscode
 .conda
+.DS_Store

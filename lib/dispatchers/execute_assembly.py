@@ -78,6 +78,10 @@ class Dispatcher:
         assembly_class     = module_args_parsed.c[0]
         assembly_method    = module_args_parsed.m[0]
         
+        if not os.path.isabs(assembly_filepath):
+            tmp_dir = os.path.join(os.getcwd(), assembly_filepath)
+            assembly_filepath = os.path.abspath(tmp_dir)
+
         if not os.path.exists(assembly_filepath):
             raise CoreException(f"invalid arguments '{assembly_filepath}': file not exists")
 

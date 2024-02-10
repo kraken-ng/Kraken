@@ -29,5 +29,7 @@ class Formater:
             new_lines = []
             for message_line in message_lines:
                 new_lines.append(message_line.split("\t"))
+            if len(new_lines) == 1:
+                new_lines.append([""])
             table = columnar.columnar(new_lines[1:], headers=new_lines[0], no_borders=True)
             return str(table)
